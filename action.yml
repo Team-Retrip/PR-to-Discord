@@ -64,17 +64,17 @@ runs:
                 "fields": [
                   {
                     "name": "🔗 문제 URL",
-                    "value": ${{ env.PROBLEM }},
+                    "value": "https://example.com",
                     "inline": false
                   },
                   {
                     "name": "👤 작성자",
-                    "value": ${{ env.USERNAME }},
+                    "value": "JohnDoe",
                     "inline": true
                   },
                   {
                     "name": "🛠️ 담당자",
-                    "value": ${{ env.MENTIONS }},
+                    "value": "담당자가 지정되지 않았습니다.",
                     "inline": false
                   }
                 ],
