@@ -82,11 +82,6 @@ runs:
                     "name": "📅 생성 날짜",
                     "value": ${{ env.TIMESTAMP }},
                     "inline": true
-                  },
-                  {
-                    "name": "🛠️ 담당자",
-                    "value": ${{ env.MENTIONS }},
-                    "inline": false
                   }
                 ],
                 "footer": {
