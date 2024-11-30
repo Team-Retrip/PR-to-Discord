@@ -25,7 +25,7 @@ runs:
         TITLE: ${{ toJson(fromJson(inputs.pull_request).title) }}
         URL: ${{ toJson(fromJson(inputs.pull_request).html_url) }}
         ASSIGNEES: ${{ toJson(fromJson(inputs.pull_request).assignees) }}
-      run: |
+      run: >
         PROBLEM=$(
           echo $BODY |
           grep -Pio 'http[\w\:\/\.\-\?\=\&]+' |
@@ -58,7 +58,7 @@ runs:
 
     - shell: bash
       env:
-        DATA: |
+        DATA: >
           {
             "username": "${{ env.USERNAME }}",
             "avatar_url": "${{ env.AVATAR_URL }}",
@@ -98,5 +98,8 @@ runs:
               }
             ]
           }
-      run: |
-        curl -X POST -H 'Content-type: application/json' -d "$DATA" ${{ inputs.discord_webhook_url }}
+      run: >
+        curl -X
+        POST -H 'Content-type:application/json'
+        -d "$DATA"
+        ${{ inputs.discord_webhook_url }}
