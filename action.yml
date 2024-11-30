@@ -82,7 +82,7 @@ runs:
             "embeds": [
               {
                 "title": "📌 Pull Request: ${{ env.TITLE }}",
-                "description": "새로운 PR이 생성되었습니다! 아래의 정보를 확인하세요.\n\n",
+                "description": "새로운 PR이 생성되었습니다! 아래의 정보를 확인하세요.",
                 "url": ${{ env.URL }},
                 "color": 3066993,
                 "fields": [
