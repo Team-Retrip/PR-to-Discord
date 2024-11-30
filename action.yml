@@ -49,7 +49,7 @@ runs:
         DATE_FORMATTED_KST=$(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M:%S')
         
         # 한국 시간을 UTC로 변환
-        DATE_FORMATTED_UTC=$(date -utc+'%Y-%m-%dT%H:%M:%SZ')
+        DATE_FORMATTED_UTC=$(date --utc +%Y-%m-%dT%H:%M:%SZ)
 
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
