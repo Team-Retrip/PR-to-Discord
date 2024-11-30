@@ -96,14 +96,14 @@ runs:
                     "value": ${{ env.USERNAME }},
                     "inline": true
                   },
-                  {
-                    "name": "📅 생성 날짜",
-                    "value": "${{ env.TIMESTAMP_KST }}",
+                     {
+                    "name": "🛠️ 담당자",
+                    "value": "${{ env.MENTIONS }}",
                     "inline": true
                   },
                   {
-                    "name": "🛠️ 담당자",
-                    "value": "${{ env.MENTIONS }}",
+                    "name": "📅 생성 날짜",
+                    "value": "${{ env.TIMESTAMP_KST }}",
                     "inline": true
                   },
                   {
