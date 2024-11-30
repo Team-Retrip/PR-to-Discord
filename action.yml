@@ -69,6 +69,7 @@ runs:
         echo "TITLE=$TITLE" >> $GITHUB_ENV;
         echo "URL=$URL" >> $GITHUB_ENV;
         echo "MENTIONS=$MENTIONS" >> $GITHUB_ENV;
+        echo "LABELS=$LABELS_LIST" >> $GITHUB_ENV;
         echo "TIMESTAMP_KST=$DATE_FORMATTED_KST" >> $GITHUB_ENV;
         echo "TIMESTAMP_UTC=$DATE_FORMATTED_UTC" >> $GITHUB_ENV;
 
