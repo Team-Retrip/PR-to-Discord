@@ -74,7 +74,7 @@ runs:
                 "color": 3066993,
                 "fields": [
                   {
-                    "name": "🔗 Pull Request URL",
+                    "name": "\n🔗 Pull Request URL",
                     "value": ${{ env.PROBLEM }},
                     "inline": false
                   },
@@ -95,8 +95,7 @@ runs:
                   }
                 ],
                 "footer": {
-                  "text": "PR Notification Bot • Team Retrip",
-                  "icon_url": "https://i.imgur.com/AfFp7pu.png"
+                  "text": "\nPR Notification Bot • Team Retrip"
                 },
                 "timestamp": "${{ env.TIMESTAMP_UTC }}"
               }
