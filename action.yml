@@ -77,12 +77,23 @@ runs:
                     "name": "👤 작성자",
                     "value": ${{ env.USERNAME }},
                     "inline": true
+                  },
+                  {
+                    "name": "📅 생성 날짜",
+                    "value": "${{ env.TIMESTAMP }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "🛠️ 담당자",
+                    "value": "${{ env.MENTIONS }}",
+                    "inline": false
                   }
                 ],
                 "footer": {
                   "text": "PR Notification Bot • Team Retrip",
                   "icon_url": "https://i.imgur.com/AfFp7pu.png"
-                }
+                },
+                "timestamp": "${{ env.TIMESTAMP }}"
               }
             ]
           }
