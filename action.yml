@@ -45,7 +45,11 @@ runs:
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
 
-        TIMESTAMP=$(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M:%S')
+        # 한국 시간(KST)으로 포맷 변경
+        DATE_FORMATTED_KST=$(TZ='Asia/Seoul' date +'%Y-%m-%d %H:%M:%S')
+        
+        # 한국 시간을 UTC로 변환
+        DATE_FORMATTED_UTC=$(date -utc+'%Y-%m-%dT%H:%M:%SZ')
 
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
@@ -53,7 +57,8 @@ runs:
         echo "TITLE=$TITLE" >> $GITHUB_ENV;
         echo "URL=$URL" >> $GITHUB_ENV;
         echo "MENTIONS=$MENTIONS" >> $GITHUB_ENV;
-        echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV;
+        echo "TIMESTAMP_KST=$DATE_FORMATTED_KST" >> $GITHUB_ENV;
+        echo "TIMESTAMP_UTC=$DATE_FORMATTED_UTC" >> $GITHUB_ENV;
 
     - shell: bash
       env:
@@ -80,7 +85,7 @@ runs:
                   },
                   {
                     "name": "📅 생성 날짜",
-                    "value": "${{ env.TIMESTAMP }}",
+                    "value": "${{ env.TIMESTAMP_KST }}",
                     "inline": true
                   },
                   {
@@ -93,7 +98,7 @@ runs:
                   "text": "PR Notification Bot • Team Retrip",
                   "icon_url": "https://i.imgur.com/AfFp7pu.png"
                 },
-                "timestamp": "${{ env.TIMESTAMP }}"
+                "timestamp": "${{ env.TIMESTAMP_UTC }}"
               }
             ]
           }
