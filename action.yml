@@ -30,8 +30,7 @@ runs:
           echo $BODY |
           grep -Pio 'http[\w\:\/\.\-\?\=\&]+' |
           head -1 ||
-          echo "$URL" |
-          tr -d '"'
+          echo "$URL"
         );
         TITLE=$(
           echo $TITLE |
