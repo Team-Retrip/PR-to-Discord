@@ -45,7 +45,7 @@ runs:
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
 
-        TIMESTAMP=$(date --utc +%Y-%m-%dT%H:%M:%SZ)
+        TIMESTAMP=$(date --utc +%Y-%m-%d %H:%M:%S)
 
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
@@ -69,7 +69,7 @@ runs:
                 "color": 3066993,
                 "fields": [
                   {
-                    "name": "🔗 문제 URL",
+                    "name": "🔗 Pull Request URL",
                     "value": ${{ env.PROBLEM }},
                     "inline": false
                   },
