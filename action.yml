@@ -43,7 +43,7 @@ runs:
 
     - shell: bash
       env:
-        DATA: |
+        DATA: >
           {
             "username": ${{ env.USERNAME }},
             "avatar_url": ${{ env.AVATAR_URL }},
