@@ -45,7 +45,7 @@ runs:
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
 
-        TIMESTAMP=$(date --utc +%Y-%m-%d %H:%M:%S)
+        TIMESTAMP=$(date --utc +'%Y-%m-%d %H:%M:%S')
 
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
