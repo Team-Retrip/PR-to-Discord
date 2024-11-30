@@ -45,16 +45,19 @@ runs:
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
 
+        TIMESTAMP=$(date --utc +%Y-%m-%dT%H:%M:%SZ)
+
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
         echo "AVATAR_URL=$AVATAR_URL" >> $GITHUB_ENV;
         echo "TITLE=$TITLE" >> $GITHUB_ENV;
         echo "URL=$URL" >> $GITHUB_ENV;
         echo "MENTIONS=$MENTIONS" >> $GITHUB_ENV;
+        echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV;
 
     - shell: bash
       env:
-        DATA: >
+        DATA: |
           {
             "username": ${{ env.USERNAME }},
             "avatar_url": ${{ env.AVATAR_URL }},
