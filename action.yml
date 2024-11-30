@@ -63,25 +63,21 @@ runs:
                 "color": 3066993,
                 "fields": [
                   {
-                    "name": "🔗 문제 URL",
-                    "value": "https://example.com",
+                    "title": "🔗 문제 URL",
+                    "description": ${{ env.PROBLEM }},
                     "inline": false
                   },
                   {
-                    "name": "👤 작성자",
-                    "value": "JohnDoe",
+                    "title": "👤 작성자",
+                    "description": ${{ env.USERNAME }},
                     "inline": true
                   },
                   {
-                    "name": "🛠️ 담당자",
-                    "value": "담당자가 지정되지 않았습니다.",
+                    "title": "🛠️ 담당자",
+                    "description": ${{ env.MENTIONS }},
                     "inline": false
                   }
                 ],
-                "footer": {
-                  "text": "PR Notification Bot • Team Retrip",
-                  "icon_url": "https://i.imgur.com/AfFp7pu.png"
-                },
                 "timestamp": ${{ env.TIMESTAMP }}
               }
             ]
