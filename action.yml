@@ -33,15 +33,11 @@ runs:
           echo "$URL" |
           tr -d '"'
         );
-
-        # Assignees 처리 로직
         MENTIONS=$(
           echo $ASSIGNEES | 
           jq -r '.[] | "@"+.login' | 
           paste -sd " "
         );
-
-        # Assignees가 없을 경우 기본 메시지 설정
         if [ -z "$MENTIONS" ]; then
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
@@ -98,7 +94,7 @@ runs:
               }
             ]
           }
-      run: |
+      run: >
         curl -X
         POST -H 'Content-type:application/json'
         -d "$DATA"
