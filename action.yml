@@ -24,7 +24,6 @@ runs:
         AVATAR_URL: ${{ toJson(fromJson(inputs.pull_request).user.avatar_url) }}
         TITLE: ${{ toJson(fromJson(inputs.pull_request).title) }}
         URL: ${{ toJson(fromJson(inputs.pull_request).html_url) }}
-        ASSIGNEES: ${{ toJson(fromJson(inputs.pull_request).assignees) }}
       run: |
         PROBLEM=$(
           echo $BODY |
@@ -33,17 +32,7 @@ runs:
           echo "$URL" |
           tr -d '"'
         );
-        MENTIONS=$(
-          echo $ASSIGNEES | 
-          jq -r '.[] | "@"+.login' | 
-          paste -sd " "
-        );
-        if [ -z "$MENTIONS" ]; then
-          MENTIONS="담당자가 지정되지 않았습니다."
-        fi
-
         TIMESTAMP=$(date --utc +%Y-%m-%dT%H:%M:%SZ)
-
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
         echo "AVATAR_URL=$AVATAR_URL" >> $GITHUB_ENV;
@@ -79,11 +68,6 @@ runs:
                     "name": "📅 생성 날짜",
                     "value": $(date +'%Y-%m-%d'),
                     "inline": true
-                  },
-                  {
-                    "name": "🛠️ 담당자",
-                    "value": ${{ env.MENTIONS }},
-                    "inline": false
                   }
                 ],
                 "footer": {
