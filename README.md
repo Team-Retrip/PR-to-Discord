@@ -10,6 +10,7 @@ Sends Pull Request notification message to Discord.
 ## Example
 
 아래 PR.yml 파일은 PR을 생성하는 각 repository .github/workflows 아래 두면 된다.
+</br>
 그러면 해당 repository에 있는 action.yml이 생성한 PR에 해당하는 정보를 읽어와 디스코드로 메시지를 보낸다.
 
 ```yaml
