@@ -80,7 +80,7 @@ runs:
                   },
                   {
                     "name": "📅 생성 날짜",
-                    "value": $(date +'%Y-%m-%d'),
+                    "value": ${{ env.TIMESTAMP }},
                     "inline": true
                   },
                   {
