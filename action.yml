@@ -25,7 +25,7 @@ runs:
         TITLE: ${{ toJson(fromJson(inputs.pull_request).title) }}
         URL: ${{ toJson(fromJson(inputs.pull_request).html_url) }}
         ASSIGNEES: ${{ toJson(fromJson(inputs.pull_request).assignees) }}
-      run: >
+      run: |
         PROBLEM=$(
           echo $BODY |
           grep -Pio 'http[\w\:\/\.\-\?\=\&]+' |
@@ -33,8 +33,8 @@ runs:
           echo "$URL" |
           tr -d '"'
         );
-        
-       # Assignees 처리 로직
+
+        # Assignees 처리 로직
         MENTIONS=$(
           echo $ASSIGNEES | 
           jq -r '.[] | "@"+.login' | 
@@ -45,57 +45,58 @@ runs:
         if [ -z "$MENTIONS" ]; then
           MENTIONS="담당자가 지정되지 않았습니다."
         fi
-        
+
+        TIMESTAMP=$(date --utc +%Y-%m-%dT%H:%M:%SZ)
+
         echo "PROBLEM=$PROBLEM" >> $GITHUB_ENV;
         echo "USERNAME=$USERNAME" >> $GITHUB_ENV;
         echo "AVATAR_URL=$AVATAR_URL" >> $GITHUB_ENV;
         echo "TITLE=$TITLE" >> $GITHUB_ENV;
         echo "URL=$URL" >> $GITHUB_ENV;
         echo "MENTIONS=$MENTIONS" >> $GITHUB_ENV;
+        echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV;
+
     - shell: bash
       env:
-       DATA: >
-        {
-          "username": ${{ env.USERNAME }},
-          "avatar_url": ${{ env.AVATAR_URL }},
-          "embeds": [
-            {
-              "title": "📌 Pull Request: ${{ env.TITLE }}",
-              "description": "새로운 PR이 생성되었습니다! 아래의 정보를 확인하세요.",
-              "url": ${{ env.URL }},
-              "color": 3066993, 
-              "fields": [
-                {
-                  "name": "🔗 문제 URL",
-                  "value": "${{ env.PROBLEM }}",
-                  "inline": false
+        DATA: |
+          {
+            "username": "${{ env.USERNAME }}",
+            "avatar_url": "${{ env.AVATAR_URL }}",
+            "embeds": [
+              {
+                "title": "📌 Pull Request: ${{ env.TITLE }}",
+                "description": "새로운 PR이 생성되었습니다! 아래의 정보를 확인하세요.",
+                "url": "${{ env.URL }}",
+                "color": 3066993,
+                "fields": [
+                  {
+                    "name": "🔗 문제 URL",
+                    "value": "${{ env.PROBLEM }}",
+                    "inline": false
+                  },
+                  {
+                    "name": "👤 작성자",
+                    "value": "${{ env.USERNAME }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "📅 생성 날짜",
+                    "value": "$(date +'%Y-%m-%d')",
+                    "inline": true
+                  },
+                  {
+                    "name": "🛠️ 담당자",
+                    "value": "${{ env.MENTIONS }}",
+                    "inline": false
+                  }
+                ],
+                "footer": {
+                  "text": "PR Notification Bot • Team Retrip",
+                  "icon_url": "https://i.imgur.com/AfFp7pu.png"
                 },
-                {
-                  "name": "👤 작성자",
-                  "value": "${{ env.USERNAME }}",
-                  "inline": true
-                },
-                {
-                  "name": "📅 생성 날짜",
-                  "value": "$(date +'%Y-%m-%d')",
-                  "inline": true
-                },
-                {
-                  "name": "🛠️ 담당자",
-                  "value": "${{ env.MENTIONS }}",
-                  "inline": false
-                }
-              ],
-              "footer": {
-                "text": "PR Notification Bot • Team Retrip",
-                "icon_url": "https://i.imgur.com/AfFp7pu.png"
-              },
-              "timestamp": "$(date --utc +%Y-%m-%dT%H:%M:%SZ)"
-            }
-          ]
-        }
-      run: >
-        curl -X
-        POST -H 'Content-type:application/json'
-        -d "$DATA"
-        ${{ inputs.discord_webhook_url }}
+                "timestamp": "${{ env.TIMESTAMP }}"
+              }
+            ]
+          }
+      run: |
+        curl -X POST -H 'Content-type: application/json' -d "$DATA" ${{ inputs.discord_webhook_url }}
