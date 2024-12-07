@@ -17,7 +17,8 @@ Sends Pull Request notification message to Discord.
 name: PR to Discord
 
 on:
-  pull_request_target:
+  pull_request:
+    branches: [ "develop" ]
     types: [opened, reopened]
 
 jobs:
@@ -27,4 +28,5 @@ jobs:
       - uses: Team-Retrip/PR-to-Discord@main
         with:
           discord_webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
 ```
